@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Madhuri Emmidi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=IBM+Plex+Mono:wght@300;400;500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/about.css" />
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-logo"><a href="index.html">ME.</a></div>
+    <div class="nav-links">
+      <a href="index.html">home</a>
+      <a href="visualizer.html">visualizer</a>
+      <a href="about.html" class="active">about</a>
+    </div>
+  </nav>
+
+  <div class="grid-bg"></div>
+
+  <main class="about-main">
+
+    <!-- about section -->
+    <section class="about-section">
+      <span class="section-tag">[ about me ]</span>
+      <div class="about-layout">
+        <div class="about-text">
+          <h1 class="about-name">Madhuri<br>Emmidi</h1>
+          <p class="about-role">// aspiring rf systems engineer</p>
+          <p class="about-body">
+            I'm an ECE student with a thing for phased arrays, THz systems,
+            and the kind of RF problems that don't have clean answers yet.
+            I built this tool because I wanted to actually understand beam
+            steering — not just solve for it on an exam.
+          </p>
+          <p class="about-body">
+            Right now I'm looking for roles where I can get hands-on with
+            radar systems, mmWave ICs, and OTA testing. If that sounds like
+            your team, I'd love to talk.
+          </p>
+          <div class="about-tags">
+            <span class="tag">phased arrays</span>
+            <span class="tag">mmWave / THz</span>
+            <span class="tag">beamforming</span>
+            <span class="tag">RF system integration</span>
+            <span class="tag">VNA + spectrum analyzers</span>
+            <span class="tag">OTA testing</span>
+          </div>
+        </div>
+        <div class="about-card-visual">
+          <div class="about-dot-grid"></div>
+          <div class="about-stat-block">
+            <div class="astat">
+              <span class="astat-num">THz</span>
+              <span class="astat-label">frequency interest</span>
+            </div>
+            <div class="astat">
+              <span class="astat-num">∞</span>
+              <span class="astat-label">hours debugging</span>
+            </div>
+            <div class="astat">
+              <span class="astat-num">1</span>
+              <span class="astat-label">hand-built visualizer</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- contact section -->
+    <section class="contact-section">
+      <span class="section-tag">[ get in touch ]</span>
+      <div class="contact-layout">
+
+        <div class="contact-info">
+          <h2 class="contact-heading">Let's talk<br><em>RF.</em></h2>
+          <p class="contact-note">Whether it's a role, a project, or just a radar question —</p>
+          <div class="contact-details">
+            <div class="cdetail">
+              <span class="cdetail-label">name</span>
+              <span class="cdetail-val">Madhuri Emmidi</span>
+            </div>
+            <div class="cdetail">
+              <span class="cdetail-label">email</span>
+              <span class="cdetail-val"><a href="mailto:madhuriemmidi1@gmail.com">madhuriemmidi1@gmail.com</a></span>
+            </div>
+            <div class="cdetail">
+              <span class="cdetail-label">phone</span>
+              <span class="cdetail-val">+1 (248) 697-7676</span>
+            </div>
+            <div class="cdetail">
+              <span class="cdetail-label">location</span>
+              <span class="cdetail-val">Detroit, MI area</span>
+            </div>
+          </div>
+          <a href="https://calendly.com" target="_blank" class="btn-primary schedule-btn">schedule a call ↗</a>
+        </div>
+
+        <form class="contact-form" id="contactForm">
+          <p class="form-note">// or send a message directly</p>
+
+          <div class="form-field">
+            <label for="fname">name</label>
+            <input type="text" id="fname" placeholder="your name" required />
+          </div>
+
+          <div class="form-field">
+            <label for="femail">email</label>
+            <input type="email" id="femail" placeholder="your@email.com" required />
+          </div>
+
+          <div class="form-field">
+            <label for="fsubject">subject</label>
+            <select id="fsubject">
+              <option value="">— select one —</option>
+              <option value="job">job opportunity</option>
+              <option value="collab">collaboration</option>
+              <option value="question">RF question</option>
+              <option value="other">something else</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="fmessage">message</label>
+            <textarea id="fmessage" placeholder="what's on your mind?" rows="5" required></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary submit-btn">send message →</button>
+          <p class="form-status" id="formStatus"></p>
+        </form>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- footer -->
+  <footer class="footer">
+    <p>madhuri emmidi — 2025</p>
+    <div class="paw-prints" id="pawPrints"></div>
+  </footer>
+
+  <!-- Firebase -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, serverTimestamp }
+      from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    // my firebase config — paste yours here if you fork this
+    const firebaseConfig = {
+      apiKey: "AIzaSyB_Z8BuO22K_977oqb6vRlW00pmXXB2iOk",
+      authDomain: "to-do-app-57631.firebaseapp.com",
+      projectId: "to-do-app-57631",
+      storageBucket: "to-do-app-57631.firebasestorage.app",
+      messagingSenderId: "577387753530",
+      appId: "1:577387753530:web:c2365f8a9f8dc1ec798503",
+      measurementId: "G-SBW475304P"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    document.getElementById('contactForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const statusEl = document.getElementById('formStatus');
+      const btn = e.target.querySelector('button[type="submit"]');
+
+      btn.textContent = 'sending...';
+      btn.disabled = true;
+
+      try {
+        await addDoc(collection(db, 'messages'), {
+          name: document.getElementById('fname').value,
+          email: document.getElementById('femail').value,
+          subject: document.getElementById('fsubject').value,
+          message: document.getElementById('fmessage').value,
+          timestamp: serverTimestamp()
+        });
+        statusEl.textContent = '// message sent. i\'ll get back to you.';
+        statusEl.style.color = 'var(--accent)';
+        e.target.reset();
+        btn.textContent = 'send message →';
+        btn.disabled = false;
+      } catch (err) {
+        console.error('firebase error:', err); // figure this out later
+        statusEl.textContent = '// something went wrong. try emailing directly.';
+        statusEl.style.color = '#c0392b';
+        btn.textContent = 'send message →';
+        btn.disabled = false;
+      }
+    });
+  </script>
+
+  <script src="js/paws.js"></script>
+</body>
+</html>

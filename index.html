@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madhuri Emmidi — RF Systems</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=IBM+Plex+Mono:wght@300;400;500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- nav -->
+  <nav class="nav">
+    <div class="nav-logo">ME.</div>
+    <div class="nav-links">
+      <a href="index.html" class="active">home</a>
+      <a href="visualizer.html">visualizer</a>
+      <a href="about.html">about</a>
+    </div>
+  </nav>
+
+  <!-- grid bg -->
+  <div class="grid-bg"></div>
+
+  <!-- hero -->
+  <section class="hero">
+    <div class="hero-left">
+      <p class="hero-comment">// aspiring rf systems engineer</p>
+      <h1 class="hero-name">Madhuri<br>Emmidi</h1>
+      <div class="hero-typing-wrap">
+        <span class="arrow">→</span>
+        <span class="typing-text" id="typingText"></span>
+        <span class="cursor">|</span>
+      </div>
+      <p class="hero-bio">ECE grad student obsessing over THz phased arrays,<br>beamforming, and making radar systems do things<br>they're not supposed to.</p>
+      <div class="hero-btns">
+        <a href="visualizer.html" class="btn-primary">open visualizer ↗</a>
+        <a href="about.html" class="btn-outline">about me</a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <!-- polar radar canvas -->
+      <canvas id="radarCanvas" width="380" height="380"></canvas>
+      <p class="radar-label">// live beam pattern — drag to steer</p>
+    </div>
+  </section>
+
+  <!-- what is this section -->
+  <section class="what-section">
+    <div class="what-inner">
+      <span class="section-tag">[ what is this ]</span>
+      <h2 class="what-heading">Beam Steering,<br><em>explained simply.</em></h2>
+      <p class="what-body">
+        Imagine pointing a flashlight beam in any direction —
+        without moving your hand. That's phased array beam steering.
+        Instead of physically rotating an antenna, we electronically
+        shift the timing of each element so the signal points
+        exactly where we want.
+      </p>
+      <p class="what-body">
+        This tool lets you play with the parameters that control that.
+        Move a slider. Watch the beam react.
+      </p>
+      <a href="visualizer.html" class="btn-primary">try the visualizer →</a>
+    </div>
+    <div class="what-decoration">
+      <div class="deco-wave" id="waveCanvas"></div>
+    </div>
+  </section>
+
+  <!-- teaser cards -->
+  <section class="teaser-section">
+    <div class="teaser-grid">
+      <div class="teaser-card" onclick="window.location='visualizer.html'">
+        <span class="card-num">01</span>
+        <h3>Beam Steering<br>Visualizer</h3>
+        <p>Adjust 6 parameters and watch the beam pattern react in real time. Interdependencies included.</p>
+        <span class="card-arrow">→</span>
+      </div>
+      <div class="teaser-card" onclick="window.location='about.html'">
+        <span class="card-num">02</span>
+        <h3>About &<br>Contact</h3>
+        <p>Who built this, why, and how to reach them. Simple.</p>
+        <span class="card-arrow">→</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- footer -->
+  <footer class="footer">
+    <p>madhuri emmidi</p>
+    <div class="paw-prints" id="pawPrints"></div>
+  </footer>
+
+  <script src="js/radar-mini.js"></script>
+  <script src="js/typing.js"></script>
+  <script src="js/paws.js"></script>
+</body>
+</html>
