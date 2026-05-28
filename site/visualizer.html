@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beam Steering Visualizer — Madhuri Emmidi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=IBM+Plex+Mono:wght@300;400;500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/visualizer.css" />
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-logo"><a href="index.html">ME.</a></div>
+    <div class="nav-links">
+      <a href="index.html">home</a>
+      <a href="visualizer.html" class="active">visualizer</a>
+      <a href="about.html">about</a>
+    </div>
+  </nav>
+
+  <div class="grid-bg"></div>
+
+  <main class="viz-main">
+
+    <div class="viz-header">
+      <span class="section-tag">[ interactive tool ]</span>
+      <h1 class="viz-title">Beam Steering<br>Visualizer</h1>
+      <p class="viz-subtitle">// move the sliders. watch the beam move.</p>
+    </div>
+
+    <div class="viz-layout">
+
+      <!-- LEFT: sliders -->
+      <div class="sliders-panel">
+        <p class="panel-note"></p>
+
+        <!-- frequency -->
+        <div class="param-block" data-param="frequency">
+          <div class="param-header">
+            <label class="param-name">Frequency</label>
+            <span class="param-value" id="freq-val">10 GHz</span>
+          </div>
+          <p class="param-desc">Like choosing the pitch of a sound — higher frequency = tighter, more focused beam.</p>
+          <input type="range" class="slider" id="freq" min="1" max="100" value="10" />
+        </div>
+
+        <!-- elements -->
+        <div class="param-block" data-param="elements">
+          <div class="param-header">
+            <label class="param-name">Antenna Elements</label>
+            <span class="param-value" id="elem-val">8</span>
+          </div>
+          <p class="param-desc">Like adding more speakers to a sound system — more elements = sharper, more focused beam.</p>
+          <input type="range" class="slider" id="elements" min="2" max="32" value="8" />
+        </div>
+
+        <!-- element spacing -->
+        <div class="param-block" data-param="spacing">
+          <div class="param-header">
+            <label class="param-name">Element Spacing</label>
+            <span class="param-value" id="spacing-val">0.50λ</span>
+          </div>
+          <p class="param-desc">The gap between antennas — like seats in a row. Too close or far apart and signals start overlapping weirdly.</p>
+          <input type="range" class="slider" id="spacing" min="10" max="100" value="50" />
+        </div>
+
+        <!-- steering angle -->
+        <div class="param-block" data-param="angle">
+          <div class="param-header">
+            <label class="param-name">Beam Steering Angle</label>
+            <span class="param-value" id="angle-val">0°</span>
+          </div>
+          <p class="param-desc">The direction you're pointing the radar beam — like tilting a flashlight left or right.</p>
+          <input type="range" class="slider" id="angle" min="-60" max="60" value="0" />
+        </div>
+
+        <!-- phase shift -->
+        <div class="param-block" data-param="phase">
+          <div class="param-header">
+            <label class="param-name">Phase Shift</label>
+            <span class="param-value" id="phase-val">0°</span>
+          </div>
+          <p class="param-desc">A timing delay applied to each antenna — like a crowd doing a stadium wave, one person at a time.</p>
+          <input type="range" class="slider" id="phase" min="-180" max="180" value="0" />
+        </div>
+
+        <!-- amplitude -->
+        <div class="param-block" data-param="amplitude">
+          <div class="param-header">
+            <label class="param-name">Signal Amplitude</label>
+            <span class="param-value" id="amp-val">100%</span>
+          </div>
+          <p class="param-desc">The strength of the signal being sent out — like turning up the volume on a speaker.</p>
+          <input type="range" class="slider" id="amplitude" min="10" max="100" value="100" />
+        </div>
+
+        <!-- ripple effect box -->
+        <div class="ripple-box" id="rippleBox">
+          <span class="ripple-label">// what just changed</span>
+          <p class="ripple-text" id="rippleText">adjust any slider above to see how parameters affect each other →</p>
+        </div>
+      </div>
+
+      <!-- RIGHT: visualization -->
+      <div class="viz-panel">
+        <canvas id="beamCanvas" width="420" height="420"></canvas>
+        <div class="viz-stats">
+          <div class="stat-item">
+            <span class="stat-label">beam width</span>
+            <span class="stat-val" id="beamWidth">—</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">steering angle</span>
+            <span class="stat-val" id="steerAngle">0°</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">side lobe level</span>
+            <span class="stat-val" id="sideLevel">—</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">grating lobes</span>
+            <span class="stat-val" id="gratingLobes">none</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- referenced from -->
+    <section class="ref-section">
+      <span class="section-tag">[ referenced from ]</span>
+      <p class="ref-note">// the RF concepts in this tool are pulled from these sources</p>
+      <div class="ref-grid">
+        <a href="https://ieee.org" target="_blank" class="ref-card">
+          <span class="ref-abbr">IEEE</span>
+          <div>
+            <p class="ref-name">ieee.org</p>
+            <p class="ref-desc">Global standard for RF, antenna, and radar engineering research</p>
+          </div>
+        </a>
+        <a href="https://analog.com" target="_blank" class="ref-card">
+          <span class="ref-abbr">ADI</span>
+          <div>
+            <p class="ref-name">analog.com</p>
+            <p class="ref-desc">Practical phased array beamforming system design guides</p>
+          </div>
+        </a>
+        <a href="https://microwaves101.com" target="_blank" class="ref-card">
+          <span class="ref-abbr">μW</span>
+          <div>
+            <p class="ref-name">microwaves101.com</p>
+            <p class="ref-desc">Real-world RF component breakdowns used by working engineers</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- footer -->
+  <footer class="footer">
+    <p>madhuri emmidi</p>
+    <div class="paw-prints" id="pawPrints"></div>
+  </footer>
+
+  <script src="js/beam-math.js"></script>
+  <script src="js/beam-draw.js"></script>
+  <script src="js/sliders.js"></script>
+  <script src="js/paws.js"></script>
+</body>
+</html>
